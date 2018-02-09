@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<head>
+  <title>FGC - Concelho de Rio Maior</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" charset=utf-8>
+
+  <link rel="stylesheet" href="css/leaflet.css" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+
+  <link rel="stylesheet" href="css/Control.OSMGeocoder.css" />
+
+  <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        html, body, #map {
+            height: 100%;
+            font: 10pt "Helvetica Neue", Arial, Helvetica, sans-serif;
+        }
+
+        .lorem {
+            font-style: italic;
+            text-align: justify;
+            color: #AAA;
+        }
+    </style>
+</head>
+<body>
+    <div id="sidebar" class="leaflet-sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="leaflet-sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li><a onclick="alert('Caso necessite de esclarecimentos, poderá contactar a sua Junta de Freguesia, o Gabinete Técnico Florestal (GTF) do Munícipio de Rio Maior, ou a GNR.')"><i class="fa fa-info"></i></a></li>
+            </ul>
+
+            <ul role="tablist">
+                <li><a href="https://github.com/CMRioMaior"><i class="fa fa-github"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="leaflet-sidebar-content">
+            <div class="leaflet-sidebar-pane" id="home">
+                <h1 class="leaflet-sidebar-header">
+                    FGC - Concelho de Rio Maior
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+                <p></p>
+                 <a href=""><img width="140" src="http://www.fundacaoantonioquadros.pt/contents/html/Image/logoriomaior.jpg" alt="logo"></a>
+
+                <p>O Município de Rio Maior e os restantes agentes de proteção civil do concelho alertam, para a obrigatoriedade dos proprietários:
+                <ul>
+                  • dos terrenos em volta das edificações ou instalações isoladas, terão de proceder à gestão de combustíveis numa faixa mínima de 50 metros, até 15 de março;
+                <p></p>
+                  • dos terrenos em volta dos aglomerados populacionais, terão de proceder à gestão de combustíveis numa faixa mínima de 100 metros, até 30 de abril.
+                </ul>
+
+                O incumprimento, constitui uma contra-ordenação punível com coima até € 120 000.</p>
+
+                <h2>Consulte as faixas de gestão de combustível na sua freguesia:</h2>
+                <ul>
+                    <li><a href="./autopan.html">Alcobertas</a></li>
+                    <li><a href="./position-right.html">Arrouquelas</a></li>
+                    <li><a href="./leaflet-api.html">Asseiceira</a></li>
+                    <li><a href="./halfheight.html">Fráguas</a></li>
+                    <li><a href="./leaflet-api.html">Rio Maior</a></li>
+                    <li><a href="./halfheight.html">São Sebastião</a></li>
+                    <li><a href="./leaflet-0.7.html">UF de S. João da Ribeira e Ribeira de S. João</a></li>
+                    <li><a href="./leaflet-0.7.html">UF de Azambujeira e Malaqueijo</a></li>
+                    <li><a href="./autopan.html">UF de Vila da Marmeleira e Assentiz</a></li>
+                    <li><a href="./position-right.html">UF de Outeiro da Cortiçada e Arruda dos Pisões</a></li>
+                </ul>
+
+                <h2>Poderá obter mais informações em:</h2>
+                <ul>
+                    
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+
+  <div id="map"></div>
+
+  <script src="js/qgis2web_expressions.js"></script>
+
+  <script src="js/Autolinker.min.js"></script>
+
+
+
+
+
+   <script src="js/leaflet.js"></script>
+   <script src="js/Bing.js"></script>
+
+   <script src="https://rawgit.com/MarcChasse/Leaflet.Permalink/master/Leaflet.Permalink.min.js"></script>
+
+   <script src="js/leaflet-sidebar.js"></script>
+   <script src="js/Control.OSMGeocoder.js"></script>
+
+   <!-- DATA -->
+  <script src="data/fgc_aglomerados_0.js"></script>
+
+   <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[39.2428683221,-9.11034698178],[39.4572129553,-8.68108422426]]);
+        
+        var bounds_group = new L.featureGroup([]);
+
+        var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+        // for all possible values and explanations see "Template Parameters" in https://msdn.microsoft.com/en-us/library/ff701716.aspx
+        var imagerySet = "Aerial"; // AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
+        var bing = new L.BingLayer("AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L", {type: imagerySet});
+        
+        var osmGeocoder = new L.Control.OSMGeocoder({placeholder: 'Procurar localização...'});
+
+        var sidebar = L.control.sidebar({ container: 'sidebar' })
+            .addTo(map)
+            .open('home');
+
+        map.addControl(new L.Control.Layers({'OSM':osm, "Bing":bing}, {}));
+        map.addControl(osmGeocoder);
+
+
+    bing.addTo(map);
+
+function setBounds() {
+        }
+        function pop_fgc_aglomerados_0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_R_FGC'] !== null ? Autolinker.link(String(feature.properties['ID_R_FGC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID_S_FGC'] !== null ? Autolinker.link(String(feature.properties['ID_S_FGC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DATA_ACCAO'] !== null ? Autolinker.link(String(feature.properties['DATA_ACCAO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['COD_INE'] !== null ? Autolinker.link(String(feature.properties['COD_INE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DESC_FGC'] !== null ? Autolinker.link(String(feature.properties['DESC_FGC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['TIPO_FGC'] !== null ? Autolinker.link(String(feature.properties['TIPO_FGC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJEC_FUNC'] !== null ? Autolinker.link(String(feature.properties['OBJEC_FUNC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AREA'] !== null ? Autolinker.link(String(feature.properties['AREA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['RESP_GC'] !== null ? Autolinker.link(String(feature.properties['RESP_GC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTER_2014'] !== null ? Autolinker.link(String(feature.properties['INTER_2014'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTER_2015'] !== null ? Autolinker.link(String(feature.properties['INTER_2015'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTER_2016'] !== null ? Autolinker.link(String(feature.properties['INTER_2016'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTER_2017'] !== null ? Autolinker.link(String(feature.properties['INTER_2017'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTER_2018'] !== null ? Autolinker.link(String(feature.properties['INTER_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXEC_2014'] !== null ? Autolinker.link(String(feature.properties['EXEC_2014'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXEC_2015'] !== null ? Autolinker.link(String(feature.properties['EXEC_2015'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXEC_2016'] !== null ? Autolinker.link(String(feature.properties['EXEC_2016'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXEC_2017'] !== null ? Autolinker.link(String(feature.properties['EXEC_2017'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['EXEC_2018'] !== null ? Autolinker.link(String(feature.properties['EXEC_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIN_2014'] !== null ? Autolinker.link(String(feature.properties['FIN_2014'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIN_2015'] !== null ? Autolinker.link(String(feature.properties['FIN_2015'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIN_2016'] !== null ? Autolinker.link(String(feature.properties['FIN_2016'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIN_2017'] !== null ? Autolinker.link(String(feature.properties['FIN_2017'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FIN_2018'] !== null ? Autolinker.link(String(feature.properties['FIN_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FASE_2014'] !== null ? Autolinker.link(String(feature.properties['FASE_2014'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FASE_2015'] !== null ? Autolinker.link(String(feature.properties['FASE_2015'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FASE_2016'] !== null ? Autolinker.link(String(feature.properties['FASE_2016'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FASE_2017'] !== null ? Autolinker.link(String(feature.properties['FASE_2017'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FASE_2018'] !== null ? Autolinker.link(String(feature.properties['FASE_2018'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBSERV'] !== null ? Autolinker.link(String(feature.properties['OBSERV'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.unbindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_fgc_aglomerados_0_0() {
+            return {
+                pane: 'pane_fgc_aglomerados_0',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,1,1,0.545098)',
+            }
+        }
+        map.createPane('pane_fgc_aglomerados_0');
+        map.getPane('pane_fgc_aglomerados_0').style.zIndex = 400;
+        map.getPane('pane_fgc_aglomerados_0').style['mix-blend-mode'] = 'multiply';
+        var layer_fgc_aglomerados_0 = new L.geoJson(json_fgc_aglomerados_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_fgc_aglomerados_0',
+            onEachFeature: pop_fgc_aglomerados_0,
+            style: style_fgc_aglomerados_0_0,
+        });
+        bounds_group.addLayer(layer_fgc_aglomerados_0);
+        map.addLayer(layer_fgc_aglomerados_0);
+        setBounds();
+
+
+
+    </script>
+
+</body>
+</html>
