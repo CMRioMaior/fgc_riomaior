@@ -59,25 +59,25 @@
 
                 <p>O Município de Rio Maior e os restantes agentes de proteção civil do concelho alertam, para a obrigatoriedade dos proprietários:
                 <ul>
-                  • dos terrenos em volta das edificações ou instalações isoladas, terão de proceder à gestão de combustíveis numa faixa mínima de 50 metros, até 15 de março;
+                 • dos terrenos em volta das edificações ou instalações isoladas, terão de proceder à gestão de combustíveis numa faixa mínima de 50 metros, até 15 de março <p><strong> - áreas com a cor <a href=""><img src="images/fgc_isoladas_0.png" alt="isoladas"></a></strong> 
                 <p></p>
-                  • dos terrenos em volta dos aglomerados populacionais, terão de proceder à gestão de combustíveis numa faixa mínima de 100 metros, até 30 de abril.
+                  • dos terrenos em volta dos aglomerados populacionais, terão de proceder à gestão de combustíveis numa faixa mínima de 100 metros, até 30 de abril <p><strong>- áreas com a cor <a href=""><img src="images/fgc_aglomerado_1.png" alt="aglomerados"></a></strong>
                 </ul>
 
                 O incumprimento, constitui uma contra-ordenação punível com coima até € 120 000.</p>
 
                 <h2>Consulte as faixas de gestão de combustível na sua freguesia:</h2>
                 <ul>
-                    <li><a href="#zoom=13&lat=51.5023&lon=-0.1052">Alcobertas</a></li>
-                    <li><a href="./position-right.html">Arrouquelas</a></li>
-                    <li><a href="./leaflet-api.html">Asseiceira</a></li>
-                    <li><a href="./halfheight.html">Fráguas</a></li>
-                    <li><a href="./leaflet-api.html">Rio Maior</a></li>
-                    <li><a href="./halfheight.html">São Sebastião</a></li>
-                    <li><a href="./leaflet-0.7.html">UF de S. João da Ribeira e Ribeira de S. João</a></li>
-                    <li><a href="./leaflet-0.7.html">UF de Azambujeira e Malaqueijo</a></li>
-                    <li><a href="./autopan.html">UF de Vila da Marmeleira e Assentiz</a></li>
-                    <li><a href="./position-right.html">UF de Outeiro da Cortiçada e Arruda dos Pisões</a></li>
+                    <li><a href="#zoom=14&lat=39.42067&lon=-8.91747">Alcobertas</a></li>
+                    <li><a href="#zoom=15&lat=39.26003&lon=-8.92288">Arrouquelas</a></li>
+                    <li><a href="#zoom=15&lat=39.29481&lon=-8.94605">Asseiceira</a></li>
+                    <li><a href="#zoom=15&lat=39.36764&lon=-8.85108">Fráguas</a></li>
+                    <li><a href="#zoom=14&lat=39.32925&lon=-8.96013">Rio Maior</a></li>
+                    <li><a href="#zoom=15&lat=39.36937&lon=-8.89142">São Sebastião</a></li>
+                    <li><a href="#zoom=15&lat=39.29166&lon=-8.87846">UF de S. João da Ribeira e Ribeira de S. João</a></li>
+                    <li><a href="#zoom=15&lat=39.28289&lon=-8.82387">UF de Azambujeira e Malaqueijo</a></li>
+                    <li><a href="#zoom=15&lat=39.25605&lon=-8.85666">UF de Vila da Marmeleira e Assentiz</a></li>
+                    <li><a href="#zoom=15&lat=39.33847&lon=-8.82868">UF de Outeiro da Cortiçada e Arruda dos Pisões</a></li>
                 </ul>
 
                 <h2>Poderá obter mais informações em:</h2>
@@ -136,6 +136,9 @@
         }).fitBounds([[39.2428683221,-9.11034698178],[39.4572129553,-8.68108422426]]);
 
 
+        map.attributionControl.addAttribution('<a href="http://www.cm-riomaior.pt/" target="_blank">2018 CM Rio Maior</a>');
+
+
         
         var bounds_group = new L.featureGroup([]);
 
@@ -151,6 +154,7 @@
             .open('home');
 
 
+        map.addControl(new L.Control.Permalink({text: ''}));
 
         map.addControl(new L.Control.Layers({'OSM':osm, "Bing":bing}, {}));
         map.addControl(searchControl);
@@ -253,10 +257,11 @@
         });
         bounds_group.addLayer(layer_concelho_rm_2);
         map.addLayer(layer_concelho_rm_2);
+
         setBounds();
 
 
-        map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers}));
+
 
 
     </script>
