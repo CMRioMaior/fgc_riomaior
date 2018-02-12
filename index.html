@@ -68,7 +68,7 @@
 
                 <h2>Consulte as faixas de gestão de combustível na sua freguesia:</h2>
                 <ul>
-                    <li><a href="./autopan.html">Alcobertas</a></li>
+                    <li><a href="#zoom=13&lat=51.5023&lon=-0.1052">Alcobertas</a></li>
                     <li><a href="./position-right.html">Arrouquelas</a></li>
                     <li><a href="./leaflet-api.html">Asseiceira</a></li>
                     <li><a href="./halfheight.html">Fráguas</a></li>
@@ -97,9 +97,12 @@
   <script src="js/Autolinker.min.js"></script>
   <script src="js/leaflet.js"></script>
   <script src="js/Bing.js"></script>
-  <script src="https://rawgit.com/MarcChasse/Leaflet.Permalink/master/Leaflet.Permalink.min.js"></script>
   <script src="js/leaflet-sidebar.js"></script>
   <script src="js/bundle.min.js"></script>
+    <script src="js/Permalink.js"></script>
+    <script src="jsPermalink.Marker.js"></script>
+    <script src="js/Permalink.Layer.js"></script>
+    <script src="js/Permalink.Overlay.js"></script>
 
 
    <!-- DADOS PARA FUNCIONAR -->
@@ -147,12 +150,16 @@
             .addTo(map)
             .open('home');
 
+
+
         map.addControl(new L.Control.Layers({'OSM':osm, "Bing":bing}, {}));
         map.addControl(searchControl);
 
 
 
+
     bing.addTo(map);
+
 
         function setBounds() {
         }
@@ -248,6 +255,8 @@
         map.addLayer(layer_concelho_rm_2);
         setBounds();
 
+
+        map.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers}));
 
 
     </script>
