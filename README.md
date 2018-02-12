@@ -4,10 +4,10 @@ Mapa de faixas de gestão de combustível para o Concelho de Rio Maior, no âmbi
 
 Criado com recurso a software livre:
 
-* leaflet (http://leafletjs.com/)
-* sidebar v2 (https://github.com/Turbo87/sidebar-v2)
-* leaflet-plugins (https://github.com/shramov/leaflet-plugins)
-* leaflet-geosearch (https://github.com/smeijer/leaflet-geosearch)
+* [leaflet](http://leafletjs.com/)
+* [sidebar v2](https://github.com/Turbo87/sidebar-v2)
+* [leaflet-plugins](https://github.com/shramov/leaflet-plugins)
+* [leaflet-geosearch](https://github.com/smeijer/leaflet-geosearch)
 
 
 
