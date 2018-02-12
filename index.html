@@ -43,7 +43,7 @@
             </ul>
 
             <ul role="tablist">
-                <li><a href="https://github.com/CMRioMaior"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://github.com/CMRioMaior/fgc_riomaior" target="_blank"><i class="fa fa-github"></i></a></li>
             </ul>
         </div>
 
@@ -82,8 +82,13 @@
 
                 <h2>Poderá obter mais informações em:</h2>
                 <ul>
-                    
+
+
+
                 </ul>
+
+
+                <p class="lorem" style="height: 15px;margin-top: 250px;"></i>Criado com recurso a software livre, poderá ser utilizado e distribuído sob a <a href="https://github.com/CMRioMaior/fgc_riomaior/blob/master/LICENSE" target="_blank">licença MIT</a></p>
 
             </div>
 
@@ -144,7 +149,7 @@
 
         var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
         // for all possible values and explanations see "Template Parameters" in https://msdn.microsoft.com/en-us/library/ff701716.aspx
-        var imagerySet = "Aerial"; // AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
+        var imagerySet = "AerialWithLabels"; // AerialWithLabels | Birdseye | BirdseyeWithLabels | Road
         var bing = new L.BingLayer("AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L", {type: imagerySet});
         
 
@@ -167,14 +172,14 @@
 
         function setBounds() {
         }
-        function pop_fgc_isoladas_0(feature, layer) {
+        /*function pop_fgc_isoladas_0(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['FID'] !== null ? Autolinker.link(String(feature.properties['FID'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.unbindPopup(popupContent, {maxHeight: 400});
-        }
+        }*/
 
         function style_fgc_isoladas_0_0() {
             return {
@@ -191,19 +196,19 @@
         var layer_fgc_isoladas_0 = new L.geoJson(json_fgc_isoladas_0, {
             attribution: '<a href=""></a>',
             pane: 'pane_fgc_isoladas_0',
-            onEachFeature: pop_fgc_isoladas_0,
+            //onEachFeature: pop_fgc_isoladas_0,
             style: style_fgc_isoladas_0_0,
         });
         bounds_group.addLayer(layer_fgc_isoladas_0);
         map.addLayer(layer_fgc_isoladas_0);
-        function pop_fgc_aglomerado_1(feature, layer) {
+        /*function pop_fgc_aglomerado_1(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['FID'] !== null ? Autolinker.link(String(feature.properties['FID'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.unbindPopup(popupContent, {maxHeight: 400});
-        }
+        }*/
 
         function style_fgc_aglomerado_1_0() {
             return {
@@ -220,19 +225,19 @@
         var layer_fgc_aglomerado_1 = new L.geoJson(json_fgc_aglomerado_1, {
             attribution: '<a href=""></a>',
             pane: 'pane_fgc_aglomerado_1',
-            onEachFeature: pop_fgc_aglomerado_1,
+            //onEachFeature: pop_fgc_aglomerado_1,
             style: style_fgc_aglomerado_1_0,
         });
         bounds_group.addLayer(layer_fgc_aglomerado_1);
         map.addLayer(layer_fgc_aglomerado_1);
-        function pop_concelho_rm_2(feature, layer) {
+        /*function pop_concelho_rm_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['FID'] !== null ? Autolinker.link(String(feature.properties['FID'])) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.unbindPopup(popupContent, {maxHeight: 400});
-        }
+        }*/
 
         function style_concelho_rm_2_0() {
             return {
@@ -252,7 +257,7 @@
         var layer_concelho_rm_2 = new L.geoJson(json_concelho_rm_2, {
             attribution: '<a href=""></a>',
             pane: 'pane_concelho_rm_2',
-            onEachFeature: pop_concelho_rm_2,
+            //onEachFeature: pop_concelho_rm_2,
             style: style_concelho_rm_2_0,
         });
         bounds_group.addLayer(layer_concelho_rm_2);
