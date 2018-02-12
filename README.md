@@ -1,6 +1,6 @@
 ## FGC - Concelho de Rio Maior
 
-Mapa de faixas de gestão de combustível para o Concelho de Rio Maior, no âmbito da Defesa da Floresta Contra Incêndios.
+Mapa de faixas de gestão de combustível para o Concelho de Rio Maior, no âmbito da Defesa da Floresta Contra Incêndios (DFCI).
 
 Criado com recurso a software livre:
 
