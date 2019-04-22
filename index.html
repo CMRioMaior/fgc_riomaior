@@ -103,9 +103,18 @@
   <div id="map"></div>
 
   <!-- javascripts necessários -->
-  <script src="js/qgis2web_expressions.js"></script>
-  <script src="js/Autolinker.min.js"></script>
-  <script src="js/leaflet.js"></script>
+
+
+
+<script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
   <script src="js/Bing.js"></script>
   <script src="js/leaflet-sidebar.js"></script>
   <script src="js/bundle.min.js"></script>
@@ -115,10 +124,14 @@
     <script src="js/Permalink.Overlay.js"></script>
 
 
+
+
+
    <!-- DADOS PARA FUNCIONAR -->
     <script src="data/fgc_isoladas_0.js"></script>
     <script src="data/fgc_aglomerado_1.js"></script>
     <script src="data/concelho_rm_2.js"></script>
+    <script src="data/incumprimentos_3.js"></script>
 
    <script>
 
@@ -171,12 +184,48 @@
 
 
 
-
     bing.addTo(map);
 
 
         function setBounds() {
         }
+        
+                     /*function pop_concelho_rm_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID'] !== null ? Autolinker.link(String(feature.properties['FID'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.unbindPopup(popupContent, {maxHeight: 400});
+        }*/
+
+        function style_concelho_rm_2_0() {
+            return {
+                pane: 'pane_concelho_rm_2',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.85)',
+                dashArray: '10,5',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+            }
+        }
+        
+        map.createPane('pane_concelho_rm_2');
+        map.getPane('pane_concelho_rm_2').style.zIndex = 402;
+        map.getPane('pane_concelho_rm_2').style['mix-blend-mode'] = 'normal';
+        var layer_concelho_rm_2 = new L.geoJson(json_concelho_rm_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_concelho_rm_2',
+            //onEachFeature: pop_concelho_rm_2,
+            style: style_concelho_rm_2_0,
+        });
+        bounds_group.addLayer(layer_concelho_rm_2);
+        map.addLayer(layer_concelho_rm_2);
+
+        
+        
         /*function pop_fgc_isoladas_0(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
@@ -186,13 +235,15 @@
             layer.unbindPopup(popupContent, {maxHeight: 400});
         }*/
 
+              
+
         function style_fgc_isoladas_0_0() {
             return {
                 pane: 'pane_fgc_isoladas_0',
                 stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,127,0,0.55)',
+                fillColor: 'rgba(255,188,1,0.55)',
             }
         }
         map.createPane('pane_fgc_isoladas_0');
@@ -221,7 +272,7 @@
                 stroke: false, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(255,1,1,0.55)',
+                fillColor: 'rgba(255,85,0,0.65)',
             }
         }
         map.createPane('pane_fgc_aglomerado_1');
@@ -235,40 +286,79 @@
         });
         bounds_group.addLayer(layer_fgc_aglomerado_1);
         map.addLayer(layer_fgc_aglomerado_1);
-        /*function pop_concelho_rm_2(feature, layer) {
+        
+        
+       
+          function pop_incumprimentos_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['FID'] !== null ? Autolinker.link(String(feature.properties['FID'])) : '') + '</td>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['folders'] !== null ? Autolinker.link(String(feature.properties['folders'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2"><strong>INCUMPRIMENTO</strong><br />' + (feature.properties['descriptio'] !== null ? Autolinker.link(String(feature.properties['descriptio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['altitude'] !== null ? Autolinker.link(String(feature.properties['altitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['alt_mode'] !== null ? Autolinker.link(String(feature.properties['alt_mode'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time_begin'] !== null ? Autolinker.link(String(feature.properties['time_begin'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time_end'] !== null ? Autolinker.link(String(feature.properties['time_end'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['time_when'] !== null ? Autolinker.link(String(feature.properties['time_when'])) : '') + '</td>\
                     </tr>\
                 </table>';
-            layer.unbindPopup(popupContent, {maxHeight: 400});
-        }*/
+            layer.bindPopup(popupContent, {
+                maxHeight: 400,
+                maxWidth: "auto"});
+        }
 
-        function style_concelho_rm_2_0() {
+        function style_incumprimentos_3_0() {
             return {
-                pane: 'pane_concelho_rm_2',
+                pane: 'pane_incumprimentos_3',
+                radius: 7.0,
                 opacity: 1,
-                color: 'rgba(0,0,0,0.85)',
-                dashArray: '10,5',
-                lineCap: 'square',
-                lineJoin: 'bevel',
-                weight: 4.0,
-                fillOpacity: 0,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,30,42,1.0)',
             }
         }
-        map.createPane('pane_concelho_rm_2');
-        map.getPane('pane_concelho_rm_2').style.zIndex = 402;
-        map.getPane('pane_concelho_rm_2').style['mix-blend-mode'] = 'normal';
-        var layer_concelho_rm_2 = new L.geoJson(json_concelho_rm_2, {
-            attribution: '<a href=""></a>',
-            pane: 'pane_concelho_rm_2',
-            //onEachFeature: pop_concelho_rm_2,
-            style: style_concelho_rm_2_0,
+        map.createPane('pane_incumprimentos_3');
+        map.getPane('pane_incumprimentos_3').style.zIndex = 403;
+        map.getPane('pane_incumprimentos_3').style['mix-blend-mode'] = 'normal';
+        var layer_incumprimentos_3 = new L.geoJson(json_incumprimentos_3, {
+            attribution: '',
+            pane: 'pane_incumprimentos_3',
+            onEachFeature: pop_incumprimentos_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_incumprimentos_3_0(feature));
+            },
         });
-        bounds_group.addLayer(layer_concelho_rm_2);
-        map.addLayer(layer_concelho_rm_2);
+        bounds_group.addLayer(layer_incumprimentos_3);
+        map.addLayer(layer_incumprimentos_3);
+        
+   
 
-        setBounds();
+
+         
+     setBounds();
 
     </script>
 
