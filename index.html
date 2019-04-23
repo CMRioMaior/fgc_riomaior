@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/leaflet.css" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+  <link rel="shortcut icon" href="images/favicon.png" type="image/png">
 
 
 <!-- Estilo para a barra de geocoding -->
@@ -361,7 +362,7 @@
     var radius = e.accuracy / 2;
 
     L.marker(e.latlng).addTo(map)
-        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+        .bindPopup("Está a cerca de, " + radius + " metros deste ponto").openPopup();
 
     L.circle(e.latlng, radius).addTo(map);
 }
