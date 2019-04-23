@@ -12,7 +12,13 @@
 
 <!-- Estilo para a barra de geocoding -->
 
-<link  href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" />
+<!--<link  href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" rel="stylesheet" /> -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-responsive-popup@0.6.3/leaflet.responsive.popup.css" />
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="css/leaflet-search.css" />
+
+
 
 <!-- + estilos -->
   <style>
@@ -31,6 +37,25 @@
             text-align: justify;
             color: #AAA;
         }
+
+
+    #findbox {
+
+	margin-bottom: 10px;
+	padding: 0px 0;
+	width: 350px;
+	height: 26px;
+}
+.search-tooltip {
+	width: 300px;
+}
+.leaflet-control-search .search-cancel {
+	position: static;
+	float: left;
+	margin-left: -5px;
+}
+
+
     </style>
 
 </head>
@@ -40,6 +65,7 @@
         <div class="leaflet-sidebar-tabs">
             <ul role="tablist">
                 <li><a href="#home" role="tab"><i class="fa fa-bars active"></i></a></li>
+                <li><a href="#procura" role="tab"><i class="fa fa-search"></i></a></li>
                 <li><a onclick="alert('Caso necessite de mais esclarecimentos, poderá contactar a sua Junta de Freguesia, o Gabinete Técnico Florestal (GTF) do Munícipio de Rio Maior, ou a GNR.')"><i class="fa fa-info"></i></a></li>
             </ul>
 
@@ -98,6 +124,24 @@
 
             </div>
 
+             <div class="leaflet-sidebar-pane" id="procura">
+                <h1 class="leaflet-sidebar-header">
+                    Procurar por morada
+                    <span class="leaflet-sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+
+                <p>A procura por morada utiliza o projecto <a href="https://www.openstreetmap.org/" target="_blank" >OSM.</a> Deverá realizar procura da seguinte forma:
+                <ul>
+                 • [o seu número],[a sua rua],[lugar],[concelho]
+                <p></p>
+                  • exemplo - "23, avenida paulo vi, rio maior" <strong>sem aspas</strong>
+                <p></p>
+                  • exemplo - "rua general humberto delgado, são sebastião, rio maior" <strong>sem aspas</strong>
+                </ul>
+
+                <div id="findbox"></div>
+            </div>
+
         </div>
     </div>
 
@@ -107,22 +151,26 @@
 
 
 
-<script src="js/qgis2web_expressions.js"></script>
-        <script src="js/leaflet.js"></script>
-        <script src="js/leaflet.rotatedMarker.js"></script>
-        <script src="js/leaflet.pattern.js"></script>
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-        <script src="js/rbush.min.js"></script>
-        <script src="js/labelgun.min.js"></script>
-        <script src="js/labels.js"></script>
-  <script src="js/Bing.js"></script>
-  <script src="js/leaflet-sidebar.js"></script>
-  <script src="js/bundle.min.js"></script>
+	<script src="js/qgis2web_expressions.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet.rotatedMarker.js"></script>
+    <script src="js/leaflet.pattern.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+    <script src="js/rbush.min.js"></script>
+    <script src="js/labelgun.min.js"></script>
+    <script src="js/labels.js"></script>
+  	<script src="js/Bing.js"></script>
+ 	<script src="js/leaflet-sidebar.js"></script>
+ 	<script src="js/bundle.min.js"></script>
     <script src="js/Permalink.js"></script>
     <script src="jsPermalink.Marker.js"></script>
     <script src="js/Permalink.Layer.js"></script>
     <script src="js/Permalink.Overlay.js"></script>
+    <script src="js/leaflet-search.js"></script>
+
+    <script src="https://unpkg.com/leaflet-responsive-popup@0.6.3/leaflet.responsive.popup.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster-src.js"></script>
 
 
 
@@ -138,7 +186,7 @@
 
 
 
-    // novo código para o geocoder
+    /*// novo código para o geocoder
         var GeoSearchControl = window.GeoSearch.GeoSearchControl;
         var OpenStreetMapProvider = window.GeoSearch.OpenStreetMapProvider;
 
@@ -148,11 +196,12 @@
         var searchControl = new GeoSearchControl({
             provider: provider,
             style: 'bar',
-            showMarker: true,
+            showMarker: false,
             retainZoomLevel: false,
             position: 'topright',
             animateZoom: true,
-        });
+        });*/
+
 
 
         var map = L.map('map', {
@@ -181,19 +230,18 @@
         map.addControl(new L.Control.Permalink({text: ''}));
 
         map.addControl(new L.Control.Layers({'OSM':osm, "Bing":bing}, {}));
-        map.addControl(searchControl);
+        //map.addControl(searchControl);
         
         map.locate({setView: true, maxZoom: 16});
 
 
-
-    bing.addTo(map);
+    	bing.addTo(map);
 
 
         function setBounds() {
         }
         
-                     /*function pop_concelho_rm_2(feature, layer) {
+        /*function pop_concelho_rm_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['FID'] !== null ? Autolinker.link(String(feature.properties['FID'])) : '') + '</td>\
@@ -292,7 +340,8 @@
         
         
        
-          function pop_incumprimentos_3(feature, layer) {
+        
+        function pop_incumprimentos_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
@@ -320,14 +369,14 @@
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {
-                maxHeight: 400,
-                maxWidth: "auto"});
+                maxHeight: 300,
+                maxWidth: 330});
         }
 
         function style_incumprimentos_3_0() {
             return {
                 pane: 'pane_incumprimentos_3',
-                radius: 7.0,
+                radius: 5.0,
                 opacity: 1,
                 color: 'rgba(255,255,255,1.0)',
                 dashArray: '',
@@ -354,20 +403,44 @@
                 return L.circleMarker(latlng, style_incumprimentos_3_0(feature));
             },
         });
+
+        // adicionado a função de cluster
+        var cluster_incumprimentos_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            maxClusterRadius: 25,
+            spiderfyDistanceMultiplier: 1});
+        cluster_incumprimentos_3.addLayer(layer_incumprimentos_3);
+
         bounds_group.addLayer(layer_incumprimentos_3);
-        map.addLayer(layer_incumprimentos_3);
-        
+        cluster_incumprimentos_3.addTo(map);
+
+   
         
         function onLocationFound(e) {
-    var radius = e.accuracy / 2;
+  		  var radius = e.accuracy / 2;
 
-    L.marker(e.latlng).addTo(map)
-        .bindPopup("Está a cerca de, " + radius + " metros deste ponto").openPopup();
+  		  L.marker(e.latlng).addTo(map)
+     	   .bindPopup("Está a cerca de, " + radius + " metros deste ponto").openPopup();
 
-    L.circle(e.latlng, radius).addTo(map);
-}
+   		L.circle(e.latlng, radius).addTo(map);
+		}
 
-map.on('locationfound', onLocationFound);
+	map.on('locationfound', onLocationFound);
+
+
+
+	   	map.addControl( new L.Control.Search({
+		url: 'https://nominatim.openstreetmap.org/search?format=json&q={s}',
+		jsonpParam: 'json_callback',
+		propertyName: 'display_name',
+		propertyLoc: ['lat','lon'],
+		container: 'findbox',
+		marker: L.circleMarker([0,0],{radius:30}),
+		collapsed: false,
+		zoom: 16,
+		autoType: false,
+		minLength: 5,
+		textPlaceholder:'Procure pela sua morada...'
+	}) );
         
    
 
