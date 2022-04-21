@@ -182,7 +182,7 @@
     <script src="data/fgc_isoladas_0.js"></script>
     <script src="data/fgc_aglomerado_1.js"></script>
     <script src="data/concelho_rm_2.js"></script>
-    <script src="data/incumprimentos_3.js"></script>
+    <script src="data/incumprimentos_2022.js"></script>
 
    <script>
 
@@ -345,29 +345,37 @@
         
         function pop_incumprimentos_3(feature, layer) {
             var popupContent = '<table>\
-                    <tr>\
-                        <td colspan="2">' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                <tr>\
+                        <th scope="row">NPA_PIPS</th>\
+                        <td>' + (feature.properties['NPA_PIPS'] !== null ? Autolinker.link(feature.properties['NPA_PIPS'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['folders'] !== null ? Autolinker.link(String(feature.properties['folders'])) : '') + '</td>\
+                        <th scope="row">CreationDate</th>\
+                        <td>' + (feature.properties['CreationDate'] !== null ? Autolinker.link(feature.properties['CreationDate'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2"><strong>INCUMPRIMENTO</strong><br />' + (feature.properties['descriptio'] !== null ? Autolinker.link(String(feature.properties['descriptio'])) : '') + '</td>\
+                        <th scope="row">Creator</th>\
+                        <td>' + (feature.properties['Creator'] !== null ? Autolinker.link(feature.properties['Creator'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['altitude'] !== null ? Autolinker.link(String(feature.properties['altitude'])) : '') + '</td>\
+                        <th scope="row">EditDate</th>\
+                        <td>' + (feature.properties['EditDate'] !== null ? Autolinker.link(feature.properties['EditDate'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['alt_mode'] !== null ? Autolinker.link(String(feature.properties['alt_mode'])) : '') + '</td>\
+                        <th scope="row">Editor</th>\
+                        <td>' + (feature.properties['Editor'] !== null ? Autolinker.link(feature.properties['Editor'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['time_begin'] !== null ? Autolinker.link(String(feature.properties['time_begin'])) : '') + '</td>\
+                        <th scope="row">Coordenadas</th>\
+                        <td>' + (feature.properties['Coordenadas'] !== null ? Autolinker.link(feature.properties['Coordenadas'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['time_end'] !== null ? Autolinker.link(String(feature.properties['time_end'])) : '') + '</td>\
+                        <th scope="row">Infração</th>\
+                        <td>' + (feature.properties['Infração'] !== null ? Autolinker.link(feature.properties['Infração'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['time_when'] !== null ? Autolinker.link(String(feature.properties['time_when'])) : '') + '</td>\
+                        <th scope="row">Situação</th>\
+                        <td>' + (feature.properties['Situação'] !== null ? Autolinker.link(feature.properties['Situação'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {
