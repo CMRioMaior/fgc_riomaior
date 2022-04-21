@@ -1,3 +1,6 @@
+
+## Adicionados os incumprimentos de 2022
+
 ## FGC - Concelho de Rio Maior
 
 Mapa de faixas de gestão de combustível para o Concelho de Rio Maior, no âmbito da Defesa da Floresta Contra Incêndios (DFCI).
